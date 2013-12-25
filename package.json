@@ -1,0 +1,22 @@
+{
+  "name":           "uupaa.base64.js",
+  "version":        "0.8.0",
+  "description":    "Base64 implement.",
+  "url":            "https://github.com/uupaa/Base64.js",
+  "keywords":       ["base64", "util", "uupaa"],
+  "author":         "uupaa <uupaa.js@gmail.com>",
+  "license":        "MIT",
+  "repository":     { "type": "git", "url": "https://github.com/uupaa/Base64.js.git" },
+  "contributors":   [],
+  "devDependencies": {
+    "uupaa.help.js": ">= 0.8.1",
+    "uupaa.task.js": ">= 0.8.0",
+    "uupaa.binarystring.js": ">= 0.8.0"
+  },
+  "lib":            "./lib/",
+  "main":           "index.js",
+  "scripts": {
+    "start":        "npm install",
+    "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js; open test/index.html"
+  }
+}
