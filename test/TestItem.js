@@ -1,6 +1,7 @@
 // --- define ----------------------------------------------
 // --- variable --------------------------------------------
 var test = new UnitTest([
+        testBase64,
         testBase64EncodeAndDecode,
         testBase64atobAndbtoa,
         testURLSafe64,
@@ -8,6 +9,21 @@ var test = new UnitTest([
 
 // --- interface -------------------------------------------
 // --- implement -------------------------------------------
+function testBase64(next) {
+
+    var source = "1234567890ABCDEFGHIJKLMN";
+    var base64 = Base64(source);
+    var revert = Base64.atob(base64);
+
+    if (source === revert) {
+        console.log("testBase64 ok");
+        next && next.pass();
+    } else {
+        console.log("testBase64 ng");
+        next && next.miss();
+    }
+}
+
 function testBase64EncodeAndDecode(next) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
