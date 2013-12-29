@@ -27,8 +27,8 @@ function testBase64(next) {
 function testBase64EncodeAndDecode(next) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.encode( BinaryString.toArray(source, 0xff) );
-    var revert = BinaryString.fromArray( Base64.decode(base64) );
+    var base64 = Base64.encode( Binary.BinaryStringToUintArray(source, 0xff) );
+    var revert = Binary.UintArrayToBinaryString( Base64.decode(base64) );
 
     if (source === revert) {
         console.log("testBase64EncodeAndDecode ok");
@@ -59,8 +59,8 @@ function testURLSafe64(next) {
     var testURLSafe64 = true;
     var source = "0=~|"; // -> URLSafe64("0=~|") -> "MD1-fA"
                          // ->    Base64("0=~|") -> "MD1+fA=="
-    var base64 = Base64.encode( BinaryString.toArray(source, 0xff), testURLSafe64 );
-    var revert = BinaryString.fromArray( Base64.decode(base64) );
+    var base64 = Base64.encode( Binary.BinaryStringToUintArray(source, 0xff), testURLSafe64 );
+    var revert = Binary.UintArrayToBinaryString( Base64.decode(base64) );
 
     if (source !== revert || /[\+\/\=]/.test(base64)) {
         console.log("testURLSafe64 ng");
