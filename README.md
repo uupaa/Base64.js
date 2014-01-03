@@ -1,7 +1,11 @@
 Base64.js
 =========
 
-Base64.js は、Base64 文字列への変換機能を提供します。
+Base64.js is convert Base64/URLSafe64 string.
+
+# API Document
+
+https://github.com/uupaa/Base64.js/wiki/Base64
 
 # Install, Setup modules
 
@@ -28,9 +32,3 @@ $ npm test
     test success.
     ok.
 ```
-
-# API Document
-
-https://github.com/uupaa/Base64.js/wiki/Base64
-
-

@@ -12,7 +12,7 @@ var test = new UnitTest([
 function testBase64(next) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64(source);
+    var base64 = Base64(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
     var revert = Base64.atob(base64);
 
     if (source === revert) {
@@ -27,8 +27,8 @@ function testBase64(next) {
 function testBase64EncodeAndDecode(next) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.encode( WordArray.fromString(source, true) ); // low-pass filter:w
-    var revert = WordArray.toString( Base64.decode(base64) );
+    var base64 = Base64.encode( ByteArray.fromString(source) ); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
+    var revert = ByteArray.toString( Base64.decode(base64) );
 
     if (source === revert) {
         console.log("testBase64EncodeAndDecode ok");
@@ -42,7 +42,7 @@ function testBase64EncodeAndDecode(next) {
 function testBase64atobAndbtoa(next) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.btoa(source);
+    var base64 = Base64.btoa(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
     var revert = Base64.atob(base64);
 
     if (source === revert) {
@@ -59,8 +59,8 @@ function testURLSafe64(next) {
     var testURLSafe64 = true;
     var source = "0=~|"; // -> URLSafe64("0=~|") -> "MD1-fA"
                          // ->    Base64("0=~|") -> "MD1+fA=="
-    var base64 = Base64.encode( WordArray.fromString(source, true), testURLSafe64 ); // low-pass filter:w
-    var revert = WordArray.toString( Base64.decode(base64) );
+    var base64 = Base64.encode( ByteArray.fromString(source), testURLSafe64 );
+    var revert = ByteArray.toString( Base64.decode(base64) );
 
     if (source !== revert || /[\+\/\=]/.test(base64)) {
         console.log("testURLSafe64 ng");
