@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.4",
+  "version":        "0.8.5",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa"],
@@ -10,6 +10,7 @@
   "contributors":   [],
   "devDependencies": {
     "uupaa.help.js": ">= 0.8.1",
+    "uupaa.test.js": ">= 0.8.0",
     "uupaa.task.js": ">= 0.8.0",
     "uupaa.bytearray.js": ">= 0.8.0"
   },
