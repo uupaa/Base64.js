@@ -22,11 +22,18 @@ function testBase64(next) {
 
 function testBase64EncodeAndDecode(next) {
 
-    var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.encode( ByteArray.fromString(source) ); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
-    var revert = ByteArray.toString( Base64.decode(base64) );
+    function _test(source) {
+        var base64 = Base64.encode( ByteArray.fromString(source) );
+        var revert = ByteArray.toString( Base64.decode(base64) );
 
-    if (source === revert) {
+        return source === revert;
+    }
+
+    var source = "1234567890ABCDEFGHIJKLMN"; // -> "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
+
+    if (_test(source) &&
+        _test(source + source) &&
+        _test((source + source).slice(2, 20))) {
         console.log("testBase64EncodeAndDecode ok");
         next && next.pass();
     } else {
