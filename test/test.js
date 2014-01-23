@@ -3,7 +3,12 @@ new Test().add([
         testBase64EncodeAndDecode,
         testBase64atobAndbtoa,
         testURLSafe64,
-    ]).run();
+    ]).run().worker(function(err, test) {
+        if (!err) {
+            Base64 = Base64_;
+            new Test(test).run().worker();
+        }
+    });
 
 function testBase64(next) {
 
