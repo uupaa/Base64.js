@@ -24,6 +24,12 @@ $ npm test
 # Minify
 
 ```sh
+$ brew install closure-compiler
 $ npm start
+
+  or
+
+$ brew install closure-compiler
+$ node node_modules/uupaa.minify.js --keep --output ./lib/Base64.min.js ./lib/Base64.js
 ```
 

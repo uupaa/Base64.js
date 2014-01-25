@@ -1,24 +1,27 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.9",
+  "version":        "0.8.10",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa"],
-  "author":         "uupaa <uupaa.js@gmail.com>",
-  "license":        "MIT",
-  "repository":     { "type": "git", "url": "https://github.com/uupaa/Base64.js.git" },
-  "contributors":   [],
+  "repository": {
+    "type":         "git",
+    "url":          "https://github.com/uupaa/Base64.js.git"
+  },
+  "scripts": {
+    "start":        "node node_modules/uupaa.minify.js -o ./lib/Base64.min.js ./lib/Base64.js",
+    "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js; open test/index.html"
+  },
   "devDependencies": {
-    "uupaa.help.js": "",
-    "uupaa.test.js": "",
-    "uupaa.task.js": "",
-    "uupaa.minify.js": "",
+    "uupaa.help.js":    "",
+    "uupaa.test.js":    "",
+    "uupaa.task.js":    "",
+    "uupaa.minify.js":  "",
     "uupaa.bytearray.js": ""
   },
   "lib":            "./lib/",
   "main":           "./index.js",
-  "scripts": {
-    "start":        "node node_modules/uupaa.minify.js -o ./lib/Base64.min.js ./lib/Base64.js",
-    "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js; open test/index.html"
-  }
+  "author":         "uupaa <uupaa.js@gmail.com>",
+  "license":        "MIT",
+  "contributors":   []
 }
