@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.12",
+  "version":        "0.8.13",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa"],
@@ -11,6 +11,9 @@
   "scripts": {
     "start":        "node node_modules/uupaa.minify.js -o ./lib/Base64.min.js ./lib/Base64.js",
     "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js; open test/index.html"
+  },
+  "dependencies": {
+    "uupaa.bytearray.js": ""
   },
   "devDependencies": {
     "uupaa.help.js":    "",
