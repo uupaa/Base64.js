@@ -1,5 +1,6 @@
 node_modules
 lint/plato/assets
-.Minify.output.js
-.Minify.tmp.js
+lint/plato/files
+lint/plato/*.html
+.Minify*
 
