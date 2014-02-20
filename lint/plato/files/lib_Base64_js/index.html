@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - lib/Base64.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome-ie7.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>lib/Base64.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">61.62</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">226</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">61.44</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">1.56</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">// @name: Base64.js
+// @require: ByteArray.js
+
+(function(global) {
+
+// --- variable --------------------------------------------
+var _inNode = &quot;process&quot; in global;
+var ByteArray = global[&quot;ByteArray&quot;] || require(&quot;uupaa.bytearray.js&quot;);
+
+// --- define ----------------------------------------------
+var BASE64_DB = {
+        chars: &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/&quot;.split(&quot;&quot;), // [&quot;A&quot;, &quot;B&quot;, ... &quot;/&quot;]
+        codes: { &quot;=&quot;: 0, &quot;-&quot;: 62, &quot;_&quot;: 63 } // { 65: 0, 66: 1 }
+                                            // charCode and URLSafe64 chars(&quot;-&quot;, &quot;_&quot;)
+    };
+
+for (var i = 0; i &lt; 64; ++i) {
+    BASE64_DB.codes[ BASE64_DB.chars[i] ] = i;
+}
+// --- interface -------------------------------------------
+function Base64(source) { // @arg String:
+                          // @ret Base64String:
+                          // @help: Base64
+                          // @desc: Convert String to Base64String.
+    return Base64_btoa(source);
+}
+Base64[&quot;name&quot;] = &quot;Base64&quot;;
+Base64[&quot;repository&quot;] = &quot;https://github.com/uupaa/Base64.js&quot;;
+
+if (_inNode) {
+//{@node
+    Base64[&quot;btoa&quot;]   = Buffer_btoa;    // Base64.btoa(source:String, hasHighOrderByte:Boolean = false):Base64String
+    Base64[&quot;atob&quot;]   = Buffer_atob;    // Base64.atob(source:Base64String):String
+    Base64[&quot;encode&quot;] = Buffer_encode;  // Base64.encode(source:ByteArray, toURLSafe64:Boolean = false):Base64String/URLSafe64String
+    Base64[&quot;decode&quot;] = Buffer_decode;  // Base64.decode(source:Base64String/URLSafe64String):ByteArray
+//}@node
+} else {
+    Base64[&quot;btoa&quot;]   = Base64_btoa;    // Base64.btoa(source:String, hasHighOrderByte:Boolean = false):Base64String
+    Base64[&quot;atob&quot;]   = Base64_atob;    // Base64.atob(source:Base64String):String
+    Base64[&quot;encode&quot;] = Base64_encode;  // Base64.encode(source:ByteArray, toURLSafe64:Boolean = false):Base64String/URLSafe64String
+    Base64[&quot;decode&quot;] = Base64_decode;  // Base64.decode(source:Base64String/URLSafe64String):ByteArray
+}
+
+// --- implement -------------------------------------------
+function Base64_btoa(source) { // @arg String: binary string.
+                               // @ret Base64String:
+                               // @help: Base64.btoa
+                               // @desc: Base64 encode wrapper
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.btoa(source)&quot;);
+//}@assert
+
+    if (&quot;btoa&quot; in global) {
+        try {
+            return global[&quot;btoa&quot;](source); // String to Base64String
+        } catch (o_o) {
+            // maybe. binary data has high-order bytes(non ascii value)
+        }
+        return global[&quot;btoa&quot;]( ByteArray[&quot;toString&quot;]( ByteArray[&quot;fromString&quot;](source) ) ); // low-pass filter
+    }
+    return Base64_encode( ByteArray[&quot;fromString&quot;](source) );
+}
+
+function Base64_atob(source) { // @arg Base64String:
+                               // @ret String:
+                               // @help: Base64.atob
+                               // @desc: Base64 decode wrapper
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.atob(source)&quot;);
+//}@assert
+
+    if (&quot;atob&quot; in global) {
+        try {
+            return global[&quot;atob&quot;](source);
+        } catch (o_o) {
+            // maybe. broken base64 data
+        }
+    }
+    return ByteArray[&quot;toString&quot;]( Base64_decode(source) );
+}
+
+function Base64_encode(source,        // @arg ByteArray: [0xff, ...]
+                       toURLSafe64) { // @arg Boolean(= false): true is URLSafe64
+                                      // @ret Base64String/URLSafe64String:
+                                      // @help: Base64.encode
+                                      // @desc: ByteArray to Base64String.
+//{@assert
+    _if(!Array.isArray(source), &quot;invalid Base64.encode(source,)&quot;);
+    if (toURLSafe64 !== undefined) {
+        _if(typeof toURLSafe64 !== &quot;boolean&quot;, &quot;invalid Base64.encode(,toURLSafe64)&quot;);
+    }
+//}@assert
+
+    var rv = [],
+        c = 0, i = -1, iz = source.length,
+        pad = [0, 2, 1][iz % 3],
+        chars = BASE64_DB.chars;
+
+    --iz;
+    while (i &lt; iz) {
+        c =  ((source[++i] &amp; 0xff) &lt;&lt; 16) |
+             ((source[++i] &amp; 0xff) &lt;&lt;  8) |
+              (source[++i] &amp; 0xff); // 24bit
+
+        rv.push(chars[(c &gt;&gt; 18) &amp; 0x3f],
+                chars[(c &gt;&gt; 12) &amp; 0x3f],
+                chars[(c &gt;&gt;  6) &amp; 0x3f],
+                chars[ c        &amp; 0x3f]);
+    }
+    if (pad &gt; 1) {
+        rv[rv.length - 2] = &quot;=&quot;;
+    }
+    if (pad &gt; 0) {
+        rv[rv.length - 1] = &quot;=&quot;;
+    }
+    if (toURLSafe64) {
+        return rv.join(&quot;&quot;).replace(/\=+$/g, &quot;&quot;). // remove tail &quot;==&quot;
+                           replace(/\+/g, &quot;-&quot;).  // replace &quot;+&quot; -&gt; &quot;-&quot;,
+                           replace(/\//g, &quot;_&quot;);  // replace &quot;/&quot; -&gt; &quot;_&quot;
+    }
+    return rv.join(&quot;&quot;);
+}
+
+function Base64_decode(source) { // @arg Base64String/URLSafe64String:
+                                 // @ret ByteArray: [0xff, ...]
+                                 // @help: Base64.decode
+                                 // @desc: Base64String to ByteArray.
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.decode(source)&quot;);
+//}@assert
+
+    var rv = [], c = 0, i = 0, ary = source.split(&quot;&quot;),
+        iz = source.length - 1,
+        codes = BASE64_DB.codes;
+
+    while (i &lt; iz) {                // 00000000|00000000|00000000 (8 x 3 = 24bit)
+        c = (codes[ary[i++]] &lt;&lt; 18) // 111111  |        |         (Base64 6bit)
+          | (codes[ary[i++]] &lt;&lt; 12) //       22|2222    |         (Base64 6bit)
+          | (codes[ary[i++]] &lt;&lt;  6) //         |    3333|33       (Base64 6bit)
+          |  codes[ary[i++]];       //         |        |  444444 (Base64 6bit)
+                                    //    v        v        v
+        rv.push((c &gt;&gt; 16) &amp; 0xff,   // 11111122                   (8bit)
+                (c &gt;&gt;  8) &amp; 0xff,   //          22223333          (8bit)
+                 c        &amp; 0xff);  //                   33444444 (8bit)
+    }
+    rv.length -= [0, 0, 2, 1][source.replace(/\=+$/, &quot;&quot;).length % 4]; // cut tail
+
+    return rv;
+}
+
+//{@node
+function Buffer_btoa(source) { // @arg String: binary string.
+                               // @ret Base64String:
+                               // @help: Base64.btoa
+                               // @desc: Base64 encode wrapper
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.btoa(source)&quot;);
+//}@assert
+
+    return new Buffer(source, &quot;ascii&quot;).toString(&quot;base64&quot;);
+}
+
+function Buffer_atob(source) { // @arg Base64String:
+                               // @ret String:
+                               // @help: Base64.atob
+                               // @desc: Base64 decode wrapper
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.atob(base64)&quot;);
+//}@assert
+
+    return new Buffer(source, &quot;base64&quot;).toString(&quot;ascii&quot;);
+}
+
+function Buffer_encode(source,        // @arg ByteArray: [0xff, ...]
+                       toURLSafe64) { // @arg Boolean(= false): true is URLSafe64
+                                      // @ret Base64String/URLSafe64String:
+                                      // @help: Base64.encode
+                                      // @desc: ByteArray to Base64String.
+//{@assert
+    _if(!Array.isArray(source), &quot;invalid Base64.encode(source,)&quot;);
+    if (toURLSafe64 !== undefined) {
+        _if(typeof toURLSafe64 !== &quot;boolean&quot;, &quot;invalid Base64.encode(,toURLSafe64)&quot;);
+    }
+//}@assert
+
+    if (toURLSafe64) {
+        return new Buffer(source).toString(&quot;base64&quot;).
+                                  replace(/\=+$/g, &quot;&quot;). // remove tail &quot;==&quot;
+                                  replace(/\+/g, &quot;-&quot;).  // replace &quot;+&quot; -&gt; &quot;-&quot;,
+                                  replace(/\//g, &quot;_&quot;);  // replace &quot;/&quot; -&gt; &quot;_&quot;
+    }
+    return new Buffer(source).toString(&quot;base64&quot;);
+}
+
+function Buffer_decode(source) { // @arg Base64String/URLSafe64String:
+                                 // @ret ByteArray: [0xff, ...]
+                                 // @help: Base64.decode
+                                 // @desc: Base64String to ByteArray.
+//{@assert
+    _if(typeof source !== &quot;string&quot;, &quot;invalid Base64.decode(source)&quot;);
+//}@assert
+
+    source = source.replace(/\-/g, &quot;+&quot;).replace(/_/g, &quot;/&quot;);
+
+    return Array.prototype.slice.call( new Buffer(source, &quot;base64&quot;) ); // Buffer -&gt; Array
+}
+//}@node
+
+//{@assert
+function _if(booleanValue, errorMessageString) {
+    if (booleanValue) {
+        throw new Error(errorMessageString);
+    }
+}
+//}@assert
+
+// --- export ----------------------------------------------
+//{@node
+if (_inNode) {
+    module[&quot;exports&quot;] = Base64;
+}
+//}@node
+if (global[&quot;Base64&quot;]) {
+    global[&quot;Base64_&quot;] = Base64; // already exsists
+} else {
+    global[&quot;Base64&quot;]  = Base64;
+}
+
+})(this.self || global);</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ complexity.cyclomatic }} <br>
+    Length : {{ complexity.halstead.length }} <br>
+    Difficulty : {{ complexity.halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ complexity.halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
