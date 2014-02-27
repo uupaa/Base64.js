@@ -4,11 +4,11 @@ new Test().add([
         testBase64atobAndbtoa,
         testURLSafe64,
     ]).run().worker(function(err, test) {
-        if (!err) {
+        if (!err && typeof Base64_ !== "undefined") {
             var undo = Test.swap(Base64, Base64_);
 
             new Test(test).run(function(err, test) {
-                undo = Test.undo(undo);
+                Test.undo(undo);
             });
         }
     });

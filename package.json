@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.18",
+  "version":        "0.8.19",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa"],
@@ -12,16 +12,15 @@
     "watch":        "node node_modules/uupaa.watch.js --verbose --action build ./lib/Base64.js",
     "build":        "node node_modules/uupaa.minify.js --keep --output ./lib/Base64.min.js ./lib/Base64.js",
     "test":         "NODE_ENV=production NODE_PATH=lib node --harmony test/index.node.js; open test/index.html",
-    "lint":         "plato --title Base64.js --jshint .jshintrc -d lint/plato lib/Base64.js; open lint/plato/index.html",
-    "clean":        "rm -rf lint/plato/assets"
+    "lint":         "plato --title Base64.js --jshint .jshintrc -d lint/plato lib/Base64.js; open lint/plato/index.html"
   },
   "dependencies": {
     "uupaa.bytearray.js": ""
   },
   "devDependencies": {
     "uupaa.help.js":    "",
-    "uupaa.test.js":    "",
     "uupaa.task.js":    "",
+    "uupaa.test.js":    "",
     "uupaa.watch.js":   "",
     "uupaa.minify.js":  "",
     "uupaa.bytearray.js": ""
