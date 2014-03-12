@@ -5,10 +5,10 @@ new Test().add([
         testURLSafe64,
     ]).run().worker(function(err, test) {
         if (!err && typeof Base64_ !== "undefined") {
-            var undo = Test.swap(Base64, Base64_);
+            var name = Test.swap(Base64, Base64_);
 
             new Test(test).run(function(err, test) {
-                Test.undo(undo);
+                Test.undo(name);
             });
         }
     });

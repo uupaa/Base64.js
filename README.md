@@ -1,7 +1,7 @@
 Base64.js
 =========
 
-Base64.js is convert Base64/URLSafe64 string.
+Convert Base64/URLSafe64 string.
 
 # Document
 
@@ -58,8 +58,4 @@ console.log( Base64("1234567890ABCDEFGHIJKLMN") ); // MTIzNDU2Nzg5MEFCQ0RFRkdISU
 5. Lint
 
     `$ npm run lint`
-
-6. Perf
-
-    http://jsperf.com/uupaa-base64/
 
