@@ -3,7 +3,7 @@
   "version":        "0.8.23",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
-  "keywords":       ["base64", "util", "uupaa"],
+  "keywords":       ["base64", "util", "uupaa", "WebModule"],
   "repository": {
     "type":         "git",
     "url":          "https://github.com/uupaa/Base64.js.git"
@@ -18,12 +18,13 @@
   },
   "x-build": {
     "inputs":       ["lib/Base64.js"],
-    "output":       "lib/Base64.min.js"
+    "output":       "release/Base64.min.js"
   },
   "dependencies": {
     "uupaa.bytearray.js": ""
   },
   "devDependencies": {
+    "uupaa.console.js": "",
     "uupaa.valid.js":   "",
     "uupaa.help.js":    "",
     "uupaa.task.js":    "",
