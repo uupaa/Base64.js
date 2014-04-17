@@ -1,11 +1,17 @@
+=========
 Base64.js
 =========
+
+![](https://travis-ci.org/uupaa/Base64.js.png)
 
 Convert Base64/URLSafe64 string.
 
 # Document
 
-https://github.com/uupaa/Base64.js/wiki/Base64
+- [WebModule](https://github.com/uupaa/WebModule) ([Slide](http://uupaa.github.io/Slide/slide/WebModule/index.html))
+- [Development](https://github.com/uupaa/WebModule/wiki/Development)
+- [Base64.js wiki](https://github.com/uupaa/Base64.js/wiki/Base64)
+
 
 # How to use
 
@@ -28,34 +34,4 @@ console.log( Base64("1234567890ABCDEFGHIJKLMN") ); // MTIzNDU2Nzg5MEFCQ0RFRkdISU
 var Base64 = require("lib/Base64.js");
 console.log( Base64("1234567890ABCDEFGHIJKLMN") ); // MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O
 ```
-
-# for Developers
-
-1. Install development dependency tools
-
-    ```sh
-    $ brew install closure-compiler
-    $ brew install node
-    $ npm install -g plato
-    ```
-
-2. Clone Repository and Install
-
-    ```sh
-    $ git clone git@github.com:uupaa/Base64.js.git
-    $ cd Base64.js
-    $ npm install
-    ```
-
-3. Build and Minify
-
-    `$ npm run build`
-
-4. Test
-
-    `$ npm run test`
-
-5. Lint
-
-    `$ npm run lint`
 
