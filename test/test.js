@@ -1,21 +1,20 @@
-new Test().add([
+var ModuleTest = (function(global) {
+
+return new Test({
+        disable:    false,
+        node:       true,
+        browser:    true,
+        worker:     true,
+        button:     true,
+        both:       true,
+        primary:    global["Base64"],
+        secondary:  global["Base64_"],
+    }).add([
         testBase64,
         testBase64EncodeAndDecode,
         testBase64atobAndbtoa,
-        testURLSafe64,
-    ]).run(function(err, test) {
-        if (1) {
-            err || test.worker(function(err, test) {
-                if (!err && typeof Base64_ !== "undefined") {
-                    var name = Test.swap(Base64, Base64_);
-
-                    new Test(test).run(function(err, test) {
-                        Test.undo(name);
-                    });
-                }
-            });
-        }
-    });
+        testURLSafe64
+    ]).run().clone();
 
 function testBase64(next) {
 
@@ -85,4 +84,6 @@ function testURLSafe64(next) {
         next && next.pass();
     }
 }
+
+})((this || 0).self || global);
 

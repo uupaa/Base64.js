@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.29",
+  "version":        "0.8.30",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa", "WebModule"],
