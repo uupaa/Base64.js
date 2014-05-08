@@ -1,14 +1,12 @@
-var ModuleTest = (function(global) {
+var ModuleTestBase64 = (function(global) {
 
-return new Test({
+return new Test("Base64", {
         disable:    false,
-        node:       true,
         browser:    true,
         worker:     true,
+        node:       true,
         button:     true,
         both:       true,
-        primary:    global["Base64"],
-        secondary:  global["Base64_"],
     }).add([
         testBase64,
         testBase64EncodeAndDecode,
@@ -23,10 +21,8 @@ function testBase64(next) {
     var revert = Base64.atob(base64);
 
     if (source === revert) {
-        console.log("testBase64 ok");
         next && next.pass();
     } else {
-        console.log("testBase64 ng");
         next && next.miss();
     }
 }
@@ -45,10 +41,8 @@ function testBase64EncodeAndDecode(next) {
     if (_test(source) &&
         _test(source + source) &&
         _test((source + source).slice(2, 20))) {
-        console.log("testBase64EncodeAndDecode ok");
         next && next.pass();
     } else {
-        console.log("testBase64EncodeAndDecode ng");
         next && next.miss();
     }
 }
@@ -60,10 +54,8 @@ function testBase64atobAndbtoa(next) {
     var revert = Base64.atob(base64);
 
     if (source === revert) {
-        console.log("testBase64atobAndbtoa ok");
         next && next.pass();
     } else {
-        console.log("testBase64atobAndbtoa ng");
         next && next.miss();
     }
 }
@@ -77,10 +69,8 @@ function testURLSafe64(next) {
     var revert = ByteArray.toString( Base64.decode(base64) );
 
     if (source !== revert || /[\+\/\=]/.test(base64)) {
-        console.log("testURLSafe64 ng");
         next && next.miss();
     } else {
-        console.log("testURLSafe64 ok");
         next && next.pass();
     }
 }
