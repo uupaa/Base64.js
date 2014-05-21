@@ -1,9 +1,9 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.32",
+  "version":        "0.8.33",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
-  "keywords":       ["base64", "util", "uupaa", "WebModule"],
+  "keywords":       ["base64", "util", "uupaa", "WebModule", "Unstable"],
   "repository": {
     "type":         "git",
     "url":          "https://github.com/uupaa/Base64.js.git"
@@ -42,7 +42,7 @@
     "uupaa.watch.js":   "",
     "uupaa.plato.js":   "",
     "uupaa.minify.js":  "",
-    "uupaa.xorshift.js":  ""
+    "uupaa.xorshift.js": ""
   },
   "lib":            "./lib/",
   "main":           "./index.js",
