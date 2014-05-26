@@ -26,11 +26,11 @@
     "target":       ["all"],
     "module": {
       "develop":    ["uupaa.valid.js"],
-      "release":    ["uupaa.bytearray.js"]
+      "release":    ["uupaa.datatype.js"]
     }
   },
   "dependencies": {
-    "uupaa.bytearray.js": ""
+    "uupaa.datatype.js": ""
   },
   "devDependencies": {
     "uupaa.nodemodule.js": "",

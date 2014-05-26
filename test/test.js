@@ -31,8 +31,8 @@ function testBase64(next) {
 function testBase64EncodeAndDecode(next) {
 
     function _test(source) {
-        var base64 = Base64.encode( ByteArray.fromString(source) );
-        var revert = ByteArray.toString( Base64.decode(base64) );
+        var base64 = Base64.encode( DataType["Array"].fromString(source) );
+        var revert = DataType["Array"].toString( Base64.decode(base64) );
 
         return source === revert;
     }
@@ -65,8 +65,8 @@ function testURLSafe64(next) {
 
     var source = "0=~|"; // -> URLSafe64("0=~|") -> "MD1-fA"
                          // ->    Base64("0=~|") -> "MD1+fA=="
-    var urlsafe64 = Base64.toURLSafe64( Base64.encode( ByteArray.fromString(source) ) );
-    var revert = ByteArray.toString( Base64.decode( Base64.fromURLSafe64( urlsafe64 ) ) );
+    var urlsafe64 = Base64.toURLSafe64( Base64.encode( DataType["Array"].fromString(source) ) );
+    var revert = DataType["Array"].toString( Base64.decode( Base64.fromURLSafe64( urlsafe64 ) ) );
 
     if (source !== revert || /[\+\/\=]/.test(urlsafe64)) {
         next && next.miss();
