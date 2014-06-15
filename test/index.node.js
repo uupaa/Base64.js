@@ -5,7 +5,7 @@ require("../node_modules/uupaa.help.js/lib/Help.js");
 require("../node_modules/uupaa.valid.js/lib/Valid.js");
 require("../node_modules/uupaa.task.js/lib/Task.js");
 require("../node_modules/uupaa.test.js/lib/Test.js");
-require("../node_modules/uupaa.xorshift.js/lib/XORShift.js");
+require("../node_modules/uupaa.random.js/lib/Random.js");
 require("../node_modules/uupaa.datatype.js/lib/DataType.js");
 require("../lib/Base64.js");
 require("../release/Base64.min.js");

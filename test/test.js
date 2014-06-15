@@ -165,11 +165,11 @@ function testRandom(next) {
     function _random(times) {
 
         for (var i = 0, iz = times; i < iz; ++i) {
-            var jz = (XORShift.random() & 0xff) + 10;
+            var jz = (random.value() & 0xff) + 10;
             var ary = [];
 
             for (var j = 0; j < jz; ++j) {
-                ary.push( XORShift.random() & 0xff );
+                ary.push( random.value() & 0xff );
             }
             if ( !_test(ary) ) {
                 debugger;
@@ -195,7 +195,7 @@ function testRandom(next) {
         return true;
     }
 
-    XORShift.init();
+    var random = new Random();
     var times = 1000;
 
     if (_random(times)) {

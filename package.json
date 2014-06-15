@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.34",
+  "version":        "0.8.35",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["base64", "util", "uupaa", "WebModule", "Unstable"],
@@ -21,7 +21,7 @@
     "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
   },
   "x-build": {
-    "files":        ["lib/Base64.js"],
+    "source":       ["lib/Base64.js"],
     "output":       "release/Base64.min.js",
     "target":       ["all"],
     "module": {
@@ -42,7 +42,7 @@
     "uupaa.watch.js":   "",
     "uupaa.plato.js":   "",
     "uupaa.minify.js":  "",
-    "uupaa.xorshift.js": ""
+    "uupaa.random.js": ""
   },
   "lib":            "./lib/",
   "main":           "./index.js",
