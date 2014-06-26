@@ -1,6 +1,6 @@
 {
   "name":           "uupaa.base64.js",
-  "version":        "0.8.36",
+  "version":        "0.8.37",
   "description":    "Base64 implement.",
   "url":            "https://github.com/uupaa/Base64.js",
   "keywords":       ["Base64", "util", "uupaa", "WebModule", "Unstable"],
@@ -28,6 +28,7 @@
     "source":       ["lib/Base64.js"],
     "output":       "release/Base64.min.js",
     "target":       ["all"],
+    "labels":       ["@dev"],
     "module": {
       "develop":    ["uupaa.valid.js"],
       "release":    ["uupaa.datatype.js"]
