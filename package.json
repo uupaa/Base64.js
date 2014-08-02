@@ -22,13 +22,14 @@
     "server":       "http-server -c-1 -p 8585 &",
     "server-stop":  "",
     "server-kill":  "killall -- node /usr/local/bin/http-server -p 8585 ; exit 0",
+    "hint":         "jshint lib/*.js",
     "lint":         "node node_modules/uupaa.plato.js; open lint/plato/index.html"
   },
   "x-build": {
     "source":       ["lib/Base64.js"],
     "output":       "release/Base64.min.js",
     "target":       ["all"],
-    "labels":       ["@dev"],
+    "label":        ["@dev"],
     "module": {
       "develop":    ["uupaa.valid.js"],
       "release":    ["uupaa.datatype.js"]
