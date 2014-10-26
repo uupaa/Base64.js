@@ -14,9 +14,12 @@ onmessage = function(event) {
     importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.test.js/lib/Test.js");
     importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.random.js/lib/Random.js");
     importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.datatype.js/lib/DataType.js");
+    importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.datatype.js/lib/Array.js");
+    importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.datatype.js/lib/Uint8Array.js");
+    importScripts(MESSAGE.BASE_DIR + "../node_modules/uupaa.datatype.js/lib/Object.js");
     importScripts(MESSAGE.BASE_DIR + "../lib/Base64.js");
     importScripts(MESSAGE.BASE_DIR + "../release/Base64.min.js");
-    importScripts(MESSAGE.BASE_DIR + "./test.js?_=1406898278819");
+    importScripts(MESSAGE.BASE_DIR + "./test.js?_=1414351554545");
 
     self.postMessage({ error: self.errorMessage || "" });
 };
@@ -30,8 +33,11 @@ onmessage = function(event) {
 <script src="../node_modules/uupaa.test.js/lib/Test.js"></script>
 <script src="../node_modules/uupaa.random.js/lib/Random.js"></script>
 <script src="../node_modules/uupaa.datatype.js/lib/DataType.js"></script>
+<script src="../node_modules/uupaa.datatype.js/lib/Array.js"></script>
+<script src="../node_modules/uupaa.datatype.js/lib/Uint8Array.js"></script>
+<script src="../node_modules/uupaa.datatype.js/lib/Object.js"></script>
 <script src="../lib/Base64.js"></script>
 <script src="../release/Base64.min.js"></script>
-<script src="./test.js?=_1406898278819"></script>
+<script src="./test.js?=_1414351554545"></script>
 
 </body></html>

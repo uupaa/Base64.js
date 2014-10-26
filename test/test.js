@@ -1,5 +1,9 @@
 var ModuleTestBase64 = (function(global) {
 
+var _runOnNode = "process" in global;
+var _runOnWorker = "WorkerLocation" in global;
+var _runOnBrowser = "document" in global;
+
 return new Test("Base64", {
         disable:    false,
         browser:    true,
@@ -12,6 +16,7 @@ return new Test("Base64", {
         testBase64EncodeAndDecode,
         testBase64atobAndbtoa,
         testRandom,
+        testIssues2,
     ]).run().clone();
 
 function testBase64(test, pass, miss) {
@@ -30,8 +35,8 @@ function testBase64(test, pass, miss) {
 function testBase64EncodeAndDecode(test, pass, miss) {
 
     function _test(source) {
-        var base64 = Base64.encode( DataType["Uint8Array"].fromString(source) );
-        var revert = DataType["Array"].toString( Base64.decode(base64) );
+        var base64 = Base64.encode( DataType.Uint8Array.fromString(source) );
+        var revert = DataType.Uint8Array.toString( Base64.decode(base64) );
 
         return source === revert;
     }
@@ -88,10 +93,37 @@ function testRandom(test, pass, miss) {
         return true;
     }
 
-    var random = new Random();
+    var random = new Random(); // Random.js
     var times = 1000;
 
     if (_random(times)) {
+        test.done(pass());
+    } else {
+        test.done(miss());
+    }
+}
+
+function testIssues2(test, pass, miss) {
+    var source = "nuko";
+    var b64 = "";
+    var revert = "";
+
+    if (_runOnNode) {
+        // wrong way
+        b64 = Base64.btoa(source);
+        revert = Base64.atob(b64);
+        //console.log(source, b64, revert);
+        // good way
+        b64 = new Buffer(source, "base64").toString("binary")
+        revert = new Buffer(b64.toString(), "binary").toString("base64");
+        //console.log(source, b64, revert);
+    } else {
+        b64 = atob(source);
+        revert = btoa(b64);
+        //console.log(source, b64, revert);
+    }
+
+    if (source === revert) {
         test.done(pass());
     } else {
         test.done(miss());
