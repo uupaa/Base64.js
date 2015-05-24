@@ -1,9 +1,9 @@
 {
   "name": "uupaa.base64.js",
-  "version": "0.9.0",
-  "description": "Base64 implement.",
+  "version": "0.9.1",
+  "description": "",
   "url": "https://github.com/uupaa/Base64.js",
-  "keywords": ["Base64", "uupaa", "WebModule", "Unstable"],
+  "keywords": ["Base64", "uupaa", "WebModule"],
   "repository": {
     "type": "git",
     "url": "https://github.com/uupaa/Base64.js.git"
@@ -20,7 +20,7 @@
     "browser": "open http://localhost:8000/Base64.js/test/index.html",
     "sim": "node ../WebModule/run/sim.js http://localhost:8000/Base64.js/test/index.html",
     "simx": "node ../WebModule/run/sim.js stop",
-    "hint": "jshint lib/*.js",
+    "hint": "eslint lib/*.js",
     "score": "node ../WebModule/run/score.js; open lint/plato/index.html",
     "patch": "node ../WebModule/run/patch.js",
     "setup": "node ../WebModule/run/setup.js",
@@ -47,14 +47,16 @@
       "output": "release/Base64.nw.min.js"
     }
   },
-  "dependencies": {},
+  "dependencies": {
+    "uupaa.hash.js": ""
+  },
   "devDependencies": {
-    "uupaa.codec.js": "",
+    "uupaa.typedarray.js": "",
     "uupaa.random.js": ""
   },
   "lib": "./lib/",
   "main": "./index.js",
-  "author": "uupaa <uupaa.js@gmail.com>",
+  "author": "uupaa",
   "license": "MIT",
   "contributors": []
 }

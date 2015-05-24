@@ -1,18 +1,6 @@
 var ModuleTestBase64 = (function(global) {
 
-var _isNodeOrNodeWebKit = !!global.global;
-var _runOnNodeWebKit =  _isNodeOrNodeWebKit &&  /native/.test(setTimeout);
-var _runOnNode       =  _isNodeOrNodeWebKit && !/native/.test(setTimeout);
-var _runOnWorker     = !_isNodeOrNodeWebKit && "WorkerLocation" in global;
-var _runOnBrowser    = !_isNodeOrNodeWebKit && "document" in global;
-
 global["BENCHMARK"] = true;
-
-if (console) {
-    if (!console.table) {
-        console.table = console.dir;
-    }
-}
 
 var test = new Test("Base64", {
         disable:    false, // disable all tests.
@@ -23,23 +11,33 @@ var test = new Test("Base64", {
         button:     true,  // show button.
         both:       true,  // test the primary and secondary modules.
         ignoreError:false, // ignore error.
+        callback:   function() {
+        },
+        errorback:  function(error) {
+        }
     }).add([
-        testBase64,
-        testBase64EncodeAndDecode,
-        testBase64atobAndbtoa,
-        testBase64Random,
-        testBase64Issues2,
+        testBase64_btoa,
+        testBase64_encode,
+        testBase64_random,
+        testBase64_issues2,
     ]);
 
-if (_runOnBrowser || _runOnNodeWebKit) {
-    //test.add([]);
-} else if (_runOnWorker) {
-    //test.add([]);
-} else if (_runOnNode) {
-    //test.add([]);
+if (IN_BROWSER || IN_NW) {
+    test.add([
+        // browser and node-webkit test
+    ]);
+} else if (IN_WORKER) {
+    test.add([
+        // worker test
+    ]);
+} else if (IN_NODE) {
+    test.add([
+        // node.js and io.js test
+    ]);
 }
 
-function testBase64(test, pass, miss) {
+// --- test cases ------------------------------------------
+function testBase64_btoa(test, pass, miss) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
     var base64 = Base64.btoa(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
@@ -52,11 +50,11 @@ function testBase64(test, pass, miss) {
     }
 }
 
-function testBase64EncodeAndDecode(test, pass, miss) {
+function testBase64_encode(test, pass, miss) {
 
     function _test(source) {
-        var base64 = Base64.encode( Codec.StringToUint8Array(source) );
-        var revert = Codec.Uint8ArrayToString( Base64.decode(base64) );
+        var base64 = Base64.encode( TypedArray.fromString(source) );
+        var revert = TypedArray.toString( Base64.decode(base64) );
 
         return source === revert;
     }
@@ -74,20 +72,7 @@ function testBase64EncodeAndDecode(test, pass, miss) {
     test.done(miss());
 }
 
-function testBase64atobAndbtoa(test, pass, miss) {
-
-    var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.btoa(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
-    var revert = Base64.atob(base64);
-
-    if (source === revert) {
-        test.done(pass());
-    } else {
-        test.done(miss());
-    }
-}
-
-function testBase64Random(test, pass, miss) {
+function testBase64_random(test, pass, miss) {
 
     function _testEncodeTypedArray(source) {
         var typedSource = new Uint8Array(source);
@@ -125,12 +110,12 @@ function testBase64Random(test, pass, miss) {
     }
 }
 
-function testBase64Issues2(test, pass, miss) {
+function testBase64_issues2(test, pass, miss) {
     var source = "nuko";
     var b64 = "";
     var revert = "";
 
-    if (_runOnNode) {
+    if (global.IS_NODE) {
         // wrong way
         b64 = Base64.btoa(source);
         revert = Base64.atob(b64);
@@ -152,7 +137,7 @@ function testBase64Issues2(test, pass, miss) {
     }
 }
 
-return test.run().clone();
+return test.run();
 
-})((this || 0).self || global);
+})(GLOBAL);
 
