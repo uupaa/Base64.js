@@ -115,7 +115,7 @@ function testBase64_issues2(test, pass, miss) {
     var b64 = "";
     var revert = "";
 
-    if (global.IS_NODE) {
+    if (IN_NODE) {
         // wrong way
         b64 = Base64.btoa(source);
         revert = Base64.atob(b64);
