@@ -40,8 +40,8 @@ if (IN_BROWSER || IN_NW) {
 function testBase64_btoa(test, pass, miss) {
 
     var source = "1234567890ABCDEFGHIJKLMN";
-    var base64 = Base64.btoa(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
-    var revert = Base64.atob(base64);
+    var base64 = WebModule.Base64.btoa(source); // "MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O"
+    var revert = WebModule.Base64.atob(base64);
 
     if (source === revert) {
         test.done(pass());
@@ -53,8 +53,8 @@ function testBase64_btoa(test, pass, miss) {
 function testBase64_encode(test, pass, miss) {
 
     function _test(source) {
-        var base64 = Base64.encode( TypedArray.fromString(source) );
-        var revert = TypedArray.toString( Base64.decode(base64) );
+        var base64 = WebModule.Base64.encode( WebModule.TypedArray.fromString(source) );
+        var revert = WebModule.TypedArray.toString( WebModule.Base64.decode(base64) );
 
         return source === revert;
     }
@@ -76,8 +76,8 @@ function testBase64_random(test, pass, miss) {
 
     function _testEncodeTypedArray(source) {
         var typedSource = new Uint8Array(source);
-        var typedBase64 = Base64.encode( typedSource );
-        var typedRevert = Base64.decode( typedBase64 );
+        var typedBase64 = WebModule.Base64.encode( typedSource );
+        var typedRevert = WebModule.Base64.decode( typedBase64 );
 
         return JSON.stringify(Array.prototype.slice.call(typedSource)) ===
                JSON.stringify(Array.prototype.slice.call(typedRevert));
@@ -100,7 +100,7 @@ function testBase64_random(test, pass, miss) {
         return true;
     }
 
-    var random = new Random(); // Random.js
+    var random = new WebModule.Random(); // Random.js
     var times = 1000;
 
     if (_random(times)) {
@@ -117,8 +117,8 @@ function testBase64_issues2(test, pass, miss) {
 
     if (IN_NODE) {
         // wrong way
-        b64 = Base64.btoa(source);
-        revert = Base64.atob(b64);
+        b64 = WebModule.Base64.btoa(source);
+        revert = WebModule.Base64.atob(b64);
         //console.log(source, b64, revert);
         // good way
         b64 = new Buffer(source, "base64").toString("binary")
