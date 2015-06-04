@@ -14,7 +14,6 @@ onmessage = function(event) {
 
     importScripts("../lib/WebModule.js");
 
-    importScripts("../node_modules/uupaa.typedarray.js/node_modules/uupaa.hash.js/lib/Hash.js");
     importScripts("../node_modules/uupaa.typedarray.js/lib/TypedArray.js");
     importScripts("../node_modules/uupaa.random.js/lib/Random.js");
     importScripts("wmtools.js");
