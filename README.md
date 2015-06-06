@@ -10,26 +10,26 @@
 ## Browser and NW.js(node-webkit)
 
 ```js
-<script src="<your-install-dir>/lib/WebModule.js"></script>
-<script src="<your-install-dir>/lib/Base64.js"></script>
+<script src="<module-dir>/lib/WebModule.js"></script>
+<script src="<module-dir>/lib/Base64.js"></script>
 <script>
-console.log( WebModule.Base64("1234567890ABCDEFGHIJKLMN") ); // MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O
+console.log( WebModule.Base64.btoa("1234567890ABCDEFGHIJKLMN") ); // MTIzNDU2Nzg5MEFCQ0RFRkdISUpLTE1O
 </script>
 ```
 
 ## WebWorkers
 
 ```js
-importScripts("<your-install-dir>lib/WebModule.js");
-importScripts("<your-install-dir>lib/Base64.js");
+importScripts("<module-dir>lib/WebModule.js");
+importScripts("<module-dir>lib/Base64.js");
 
 ```
 
 ## Node.js
 
 ```js
-require("<your-install-dir>lib/WebModule.js");
-require("<your-install-dir>lib/Base64.js");
+require("<module-dir>lib/WebModule.js");
+require("<module-dir>lib/Base64.js");
 
 ```
 
