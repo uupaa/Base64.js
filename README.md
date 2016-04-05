@@ -24,16 +24,16 @@ var undo = Base64.atob(b64);                        // -> "1234567890ABCDEFGHIJK
 ## WebWorkers
 
 ```js
-importScripts("<module-dir>lib/WebModule.js");
-importScripts("<module-dir>lib/Base64.js");
+importScripts("<module-dir>/lib/WebModule.js");
+importScripts("<module-dir>/lib/Base64.js");
 
 ```
 
 ## Node.js
 
 ```js
-require("<module-dir>lib/WebModule.js");
-require("<module-dir>lib/Base64.js");
+require("<module-dir>/lib/WebModule.js");
+require("<module-dir>/lib/Base64.js");
 
 ```
 
