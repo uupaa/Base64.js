@@ -12,14 +12,18 @@ onmessage = function(event) {
         self.console.table = function() {};
     }
 
-    importScripts("../lib/WebModule.js");
+    importScripts("../../lib/WebModule.js");
 
-    importScripts("../node_modules/uupaa.typedarray.js/lib/TypedArray.js");
-    importScripts("../node_modules/uupaa.random.js/lib/Random.js");
-    importScripts("wmtools.js");
-    importScripts("../lib/Base64.js");
-    importScripts("../release/Base64.w.min.js");
-    importScripts("testcase.js");
+    WebModule.VERIFY  = true;
+    WebModule.VERBOSE = true;
+    WebModule.PUBLISH = true;
+
+    importScripts("../../node_modules/uupaa.random.js/lib/Random.js");
+    importScripts("../../node_modules/uupaa.typedarray.js/lib/TypedArray.js");
+    importScripts("../wmtools.js");
+    importScripts("../../lib/Base64.js");
+    importScripts("../../release/Base64.w.min.js");
+    importScripts("../testcase.js");
 
     self.postMessage(self.unitTest);
 };
